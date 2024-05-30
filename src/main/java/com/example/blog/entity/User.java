@@ -1,17 +1,15 @@
 package com.example.blog.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Entity
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@NoArgsConstructor
+@Table(name = "user")
+public class User extends AbstractEntity<Long> {
     private String username;
-    private String email;
+    private String firstname;
+    private String lastname;
+    private String password;
 }

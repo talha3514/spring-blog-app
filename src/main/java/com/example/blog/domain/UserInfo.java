@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-    public String username;
-    public String firstname;
-    public String lastname;
-    public String password;
+public class UserInfo extends BaseDomain {
+    public String city;
+    public String phone;
+    public String email;
+    public Long userId;
 }
