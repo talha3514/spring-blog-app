@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Content extends BaseDomain {
+public class Content {
     public String content;
     public String title;
 }

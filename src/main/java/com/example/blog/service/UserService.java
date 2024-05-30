@@ -1,6 +1,9 @@
 package com.example.blog.service;
 
+import com.example.blog.domain.UserDetails;
 import com.example.blog.entity.User;
+import com.example.blog.entity.UserInfo;
+import com.example.blog.repository.UserInfoRepository;
 import com.example.blog.repository.UserRepository;
 import com.example.blog.util.ModelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +16,13 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, UserInfoRepository userInfoRepository) {
         this.userRepository = userRepository;
+        this.userInfoRepository = userInfoRepository;
     }
 
     private final UserRepository userRepository;
+    private final UserInfoRepository userInfoRepository;
 
     public List<com.example.blog.domain.User> getAllUsers() {
         List<User> users = userRepository.findAll();
@@ -32,14 +37,17 @@ public class UserService {
         return Optional.ofNullable(ModelUtil.modelMapper.map(user, com.example.blog.domain.User.class));
     }
 
-    public com.example.blog.domain.User createUser(com.example.blog.domain.User user) {
-        User userEntity = ModelUtil.modelMapper.map(user, User.class);
+    public com.example.blog.domain.User createUser(UserDetails userDetails) {
+        User userEntity = ModelUtil.modelMapper.map(userDetails, User.class);
+        UserInfo userInfoEntity = ModelUtil.modelMapper.map(userDetails, UserInfo.class);
         userEntity = userRepository.save(userEntity);
+        userInfoRepository.save(userInfoEntity);
 
         return ModelUtil.modelMapper.map(userEntity, com.example.blog.domain.User.class);
     }
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+        userInfoRepository.deleteByUserId(id);
     }
 }

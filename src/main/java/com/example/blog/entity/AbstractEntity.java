@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
+@Entity
 public class AbstractEntity<ID> {
     @Id
     @Column(name = "id", nullable = false, unique = true, updatable = false)

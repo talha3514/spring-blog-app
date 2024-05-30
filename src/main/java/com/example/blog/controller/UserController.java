@@ -1,8 +1,8 @@
 package com.example.blog.controller;
 
 import com.example.blog.domain.User;
+import com.example.blog.domain.UserDetails;
 import com.example.blog.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +30,8 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public User createUser(@RequestBody UserDetails userDetails) {
+        return userService.createUser(userDetails);
     }
 
     @DeleteMapping("/{id}")
