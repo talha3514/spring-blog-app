@@ -3,22 +3,18 @@ package com.example.blog.controller;
 import com.example.blog.domain.Category;
 import com.example.blog.domain.Post;
 import com.example.blog.service.CategoryService;
-import com.example.blog.service.PostCategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
     private final CategoryService categoryService;
-    private final PostCategoryService postCategoryService;
 
-    public CategoryController(CategoryService categoryService, PostCategoryService postCategoryService) {
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
-        this.postCategoryService = postCategoryService;
     }
 
     @GetMapping
@@ -43,8 +39,8 @@ public class CategoryController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/posts/{id}")
-    public List<Post> getPostsByCategoryId(@PathVariable Long id) {
-        return postCategoryService.getAllPostByCategoryId(id);
-    }
+    //@GetMapping("/posts/{id}")
+    //public List<Post> getPostsByCategoryId(@PathVariable Long id) {
+        //return postCategoryService.getAllPostByCategoryId(id);
+    //}
 }

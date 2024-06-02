@@ -14,24 +14,26 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@Data
-@Entity
+//@NoArgsConstructor
+//@Data
+//@Entity
+@MappedSuperclass
 public class AbstractEntity<ID> {
+
     @Id
-    @Column(name = "id", nullable = false, unique = true, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private ID id;
+    //@Column(name = "id", nullable = false, unique = true, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public ID id;
 
     @JsonIgnore
     @Version
-    private Integer version;
+    public Integer version;
 
     @JsonIgnore
     @CreationTimestamp
-    private LocalDateTime created;
+    public LocalDateTime created;
 
     @JsonIgnore
     @UpdateTimestamp
-    private LocalDateTime updated;
+    public LocalDateTime updated;
 }

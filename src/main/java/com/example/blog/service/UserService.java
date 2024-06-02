@@ -28,7 +28,9 @@ public class UserService {
         List<User> users = userRepository.findAll();
 
         return users.stream()
-                .map(x -> ModelUtil.modelMapper.map(x, com.example.blog.domain.User.class))
+                .map(x -> {
+                    return ModelUtil.modelMapper.map(x, com.example.blog.domain.User.class);
+                })
                 .toList();
     }
 
@@ -38,9 +40,19 @@ public class UserService {
     }
 
     public com.example.blog.domain.User createUser(UserDetails userDetails) {
-        User userEntity = ModelUtil.modelMapper.map(userDetails, User.class);
-        UserInfo userInfoEntity = ModelUtil.modelMapper.map(userDetails, UserInfo.class);
+        User userEntity = new User();
+        userEntity.username = userDetails.getUsername();
+        userEntity.firstname = userDetails.getFirstname();
+        userEntity.lastname = userDetails.getLastname();
+        userEntity.password = userDetails.getPassword();
+
+        UserInfo userInfoEntity = new UserInfo();
+        userInfoEntity.city = userDetails.getCity();
+        userInfoEntity.phone = userDetails.getPhone();
+        userInfoEntity.email = userDetails.getEmail();
+
         userEntity = userRepository.save(userEntity);
+        userInfoEntity.user = userEntity;
         userInfoRepository.save(userInfoEntity);
 
         return ModelUtil.modelMapper.map(userEntity, com.example.blog.domain.User.class);

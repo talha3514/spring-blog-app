@@ -1,6 +1,8 @@
 package com.example.blog.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
 
@@ -8,8 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "comment")
 public class Comment extends AbstractEntity<Long> {
-    private Long postId;
-    private String title;
-    private String content;
-    private Long userId;
+    public String title;
+    public String content;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    public Post post;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    public User user;
 }
