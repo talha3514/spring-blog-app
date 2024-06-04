@@ -11,5 +11,6 @@ public class UserInfo {
     public String city;
     public String phone;
     public String email;
-    public Long userId;
+
+    //public User user;
 }

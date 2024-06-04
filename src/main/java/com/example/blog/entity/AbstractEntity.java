@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 //@NoArgsConstructor
-//@Data
+@Data
 //@Entity
 @MappedSuperclass
 public class AbstractEntity<ID> {

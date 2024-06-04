@@ -13,5 +13,5 @@ public class User {
     public String lastname;
     public String password;
 
-    //public UserInfo userInfo;
+    public UserInfo userInfo;
 }
