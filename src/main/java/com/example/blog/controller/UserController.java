@@ -39,4 +39,9 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{id}")
+    public User updateUser(@PathVariable("id") Long id, @RequestBody UserDetails userDetails) {
+        return userService.updateUser(id, userDetails);
+    }
 }

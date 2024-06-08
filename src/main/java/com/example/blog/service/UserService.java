@@ -62,4 +62,24 @@ public class UserService {
         userRepository.deleteById(id);
         userInfoRepository.deleteByUserId(id);
     }
+
+    public com.example.blog.domain.User updateUser(Long id, UserDetails userDetails) {
+        Optional<User> user = userRepository.findById(id);
+        if(user.isEmpty()){
+            return null;
+        }
+
+        user.get().setUsername(userDetails.getUsername());
+        user.get().setFirstname(userDetails.getFirstname());
+        user.get().setLastname(userDetails.getLastname());
+        user.get().setPassword(userDetails.getPassword());
+
+        user.get().userInfo.setCity(userDetails.getCity());
+        user.get().userInfo.setPhone(userDetails.getPhone());
+        user.get().userInfo.setEmail(userDetails.getEmail());
+        userRepository.save(user.get());
+
+
+        return ModelUtil.modelMapper.map(user.get(), com.example.blog.domain.User.class);
+    }
 }

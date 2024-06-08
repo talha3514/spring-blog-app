@@ -42,4 +42,16 @@ public class CategoryService {
     public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);
     }
+
+    public Category updateCategory(Long id, com.example.blog.domain.Category category) {
+        Optional<com.example.blog.entity.Category> categoryEntity = categoryRepository.findById(id);
+        if (categoryEntity.isEmpty()) {
+            return null;
+        }
+
+        categoryEntity.get().setTitle(category.getTitle());
+        categoryEntity.get().setContent(category.getContent());
+        categoryRepository.save(categoryEntity.get());
+        return ModelUtil.modelMapper.map(categoryEntity, com.example.blog.domain.Category.class);
+    }
 }

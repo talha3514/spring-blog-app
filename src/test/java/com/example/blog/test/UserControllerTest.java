@@ -49,7 +49,6 @@ public class UserControllerTest {
         user2.setPassword("password");
         user2.setLastname("user");
         user1.setId(2L);
-
     }
 
     @Test

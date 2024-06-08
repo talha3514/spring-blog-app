@@ -41,4 +41,17 @@ public class CommentService {
     public void deleteComment(Long id) {
         commentRepository.deleteById(id);
     }
+
+    public Comment updateComment(Long id, com.example.blog.domain.Comment comment) {
+        Optional<com.example.blog.entity.Comment> commentEntity = commentRepository.findById(id);
+        if (commentEntity.isPresent()) {
+            return null;
+        }
+
+        commentEntity.get().setTitle(comment.getTitle());
+        commentEntity.get().setContent(comment.getContent());
+        commentRepository.save(commentEntity.get());
+
+        return ModelUtil.modelMapper.map(commentEntity, com.example.blog.domain.Comment.class);
+    }
 }

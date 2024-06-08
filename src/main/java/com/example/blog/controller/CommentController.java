@@ -23,7 +23,7 @@ public class CommentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Comment> getCommentById(@PathVariable Long id) {
+    public ResponseEntity<Comment> getCommentById(@PathVariable("id") Long id) {
         Optional<Comment> Comment = commentService.getCommentById(id);
         return Comment.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -34,8 +34,13 @@ public class CommentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteComment(@PathVariable("id") Long id) {
         commentService.deleteComment(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}")
+    public Comment updateComment(@PathVariable("id") Long id, @RequestBody Comment Comment) {
+        return commentService.updateComment(id, Comment);
     }
 }
